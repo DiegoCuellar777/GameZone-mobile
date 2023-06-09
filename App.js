@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert,Image} from 'react-native';
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
+import logo from './assets/luis.png'
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import GameList from './src/components/GameList';
@@ -133,11 +134,13 @@ export default function App() {
               resizeMode="cover"
               style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
             >
+
               <View
+
                 h1
                 style={{
                   flex: 0.9,
-                  justifyContent: 'center',
+                  justifyContent: 'between',
                   alignItems: 'center',
                   color: 'blue',
                   backgroundColor: '#00000095',
@@ -146,6 +149,8 @@ export default function App() {
                   padding: 10,
                 }}
               >
+                <Image source={logo} style={{width:200,height:200}}  />
+
                 <Text
                   style={{
                     color: 'white',
@@ -198,7 +203,7 @@ export default function App() {
                   onPress={isLoginView ? handleLogin : handleRegister}
                   title={isLoginView ? 'Sign In' : 'Register'}
                 />
-                <TouchableOpacity onPress={toggleView}>
+                <TouchableOpacity style={{marginTop:15}} onPress={toggleView}>
                   <Text style={{ color: 'white', marginTop: 10, textAlign: 'center' }}>
                     {isLoginView && (
                       <>
