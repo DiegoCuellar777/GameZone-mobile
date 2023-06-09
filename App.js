@@ -62,7 +62,7 @@ export default function App() {
 
     try {
       const res = await axios.post(
-        'https://minga-naranja-back-0pzg.onrender.com/auth/signin',
+        'https://game-zone-back.onrender.com/auth/signin',
         dataUser
       );
       console.log(res.data);
@@ -72,7 +72,7 @@ export default function App() {
         console.log(token)
 
         let headers = { headers: { Authorization: `Bearer ${token}` } };
-      axios.get('https://minga-naranja-back-0pzg.onrender.com/mangas', headers)
+      axios.get('https://game-zone-back.onrender.com/games', headers)
         .then((res) => {
           console.log(res.data.response)
           setGames(res.data.response)
