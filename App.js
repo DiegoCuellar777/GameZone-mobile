@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert,Image} from 'react-native';
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
-
 import logo from './assets/luis.png'
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import GameList from './src/components/GameList';
+
 
 export default function App() {
   const [index, setIndex] = React.useState(0);
@@ -21,6 +22,13 @@ export default function App() {
   const [alertMessage, setAlertMessage] = React.useState('');
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  let token
+  const [games, setGames] = React.useState([]);
+
+  
+
+
 
   const PurpleButton = ({ onPress, title }) => {
     return (
@@ -55,12 +63,24 @@ export default function App() {
 
     try {
       const res = await axios.post(
-        'https://minga-naranja-back-0pzg.onrender.com/auth/signin',
+        'https://game-zone-back.onrender.com/auth/signin',
         dataUser
       );
       console.log(res.data);
 
       if (res.data.user) {
+        token = res.data.token 
+        console.log(token)
+
+        let headers = { headers: { Authorization: `Bearer ${token}` } };
+      axios.get('https://game-zone-back.onrender.com/games', headers)
+        .then((res) => {
+          console.log(res.data.response)
+          setGames(res.data.response)
+          console.log(games);
+        })
+        .catch((err) => console.log(err))
+
         setIsLoggedIn(true);
         Alert.alert('Welcome', `Hello ${res.data.user.email}`);
       } else {
@@ -77,7 +97,10 @@ export default function App() {
 
       setIsAlertVisible(true);
     }
+
+   
   };
+
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -267,8 +290,14 @@ export default function App() {
         <>
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={styles.container}>
-              <View>
-                <Text style={styles.text}>Welcome to the Product View!</Text>
+              <View
+                style={{
+                  width:"100%",
+                  flex:0.5,
+                  alignItems:"center",
+                  justifyContent:"center"
+                }}>
+               <GameList games={games}/>
                 <TouchableOpacity onPress={() => setIsLoggedIn(false)} style={styles.logoutButton}>
                   <Text style={styles.logoutText}>Logout</Text>
                 </TouchableOpacity>
