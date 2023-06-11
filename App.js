@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert,Image} from 'react-native';
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
+
 import logo from './assets/luis.png'
 import axios from 'axios';
 import Modal from 'react-native-modal';
@@ -9,7 +10,7 @@ import Modal from 'react-native-modal';
 export default function App() {
   const [index, setIndex] = React.useState(0);
   const [isLoginView, setIsLoginView] = React.useState(true);
-  const image = { uri: 'https://wallpaperaccess.com/full/982096.jpg' };
+  const image = { uri: 'https://wallpaperaccess.com/full/3591996.jpg' };
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
