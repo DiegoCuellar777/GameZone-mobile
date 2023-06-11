@@ -11,7 +11,7 @@ import GameList from './src/components/GameList';
 export default function App() {
   const [index, setIndex] = React.useState(0);
   const [isLoginView, setIsLoginView] = React.useState(true);
-  const image = { uri: 'https://wallpaperaccess.com/full/982096.jpg' };
+  const image = { uri: 'https://wallpaperaccess.com/full/3591996.jpg' };
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -25,8 +25,6 @@ export default function App() {
 
   let token
   const [games, setGames] = React.useState([]);
-
-  
 
 
 
