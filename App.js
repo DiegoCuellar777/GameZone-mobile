@@ -26,8 +26,6 @@ export default function App() {
   let token
   const [games, setGames] = React.useState([]);
 
-  
-
 
 
   const PurpleButton = ({ onPress, title }) => {
