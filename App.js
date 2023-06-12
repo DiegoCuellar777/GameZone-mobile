@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import GameList from './src/components/GameList';
-
+import { TabBarIOS } from 'react-native';
 
 export default function App() {
   const [index, setIndex] = React.useState(0);
@@ -26,7 +26,9 @@ export default function App() {
   const [games, setGames] = React.useState([]);
 
   
-
+  useEffect(() => {
+    console.log(games);
+  }, [games]);
 
 
   const PurpleButton = ({ onPress, title }) => {
@@ -72,10 +74,10 @@ export default function App() {
         console.log(token)
 
         let headers = { headers: { Authorization: `Bearer ${token}` } };
-      axios.get('https://game-zone-back.onrender.com/games', headers)
+      axios.get('https://game-zone-back.onrender.com/games/all', headers)
         .then((res) => {
-          console.log(res.data.response)
-          setGames(res.data.response)
+          console.log(res.data.Game)
+          setGames(res.data.Game)
           console.log(games);
         })
         .catch((err) => console.log(err))
@@ -285,18 +287,12 @@ export default function App() {
         <>
           <TabView value={index} onChange={setIndex} animationType="spring">
             <TabView.Item style={styles.container}>
-              <View
-                style={{
-                  width:"100%",
-                  flex:0.5,
-                  alignItems:"center",
-                  justifyContent:"center"
-                }}>
+              <ScrollView>
                <GameList games={games}/>
                 <TouchableOpacity onPress={() => setIsLoggedIn(false)} style={styles.logoutButton}>
                   <Text style={styles.logoutText}>Logout</Text>
                 </TouchableOpacity>
-              </View>
+              </ScrollView>
             </TabView.Item>
             <TabView.Item style={{ backgroundColor: 'black', width: '100%' }}>
               <Text h1>Favorite</Text>
