@@ -4,11 +4,23 @@ import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert,I
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
 import logo from './assets/luis.png'
 import axios from 'axios';
+import api from './api'
 import Modal from 'react-native-modal';
 import GameList from './src/components/GameList';
+import inputs_filter_actions from './src/store/actions/inputs_filters'
+import {useSelector,useDispatch,} from 'react-redux'
+import { Provider } from 'react-redux';
+import store1 from './src/store/store'
 
+
+
+
+const { inputs_filter } = inputs_filter_actions
 
 export default function App() {
+
+
+/*  let store=useSelector(store=>console.log(store))  */
   const [index, setIndex] = React.useState(0);
   const [isLoginView, setIsLoginView] = React.useState(true);
   const image = { uri: 'https://wallpaperaccess.com/full/3591996.jpg' };
@@ -121,7 +133,9 @@ export default function App() {
     setIsAlertVisible(false);
   };
 
+
   return (
+    <Provider store={store1}>
     <>
     {!isLoggedIn ? (
       <>
@@ -337,6 +351,7 @@ export default function App() {
         </>
     )}
   </>
+</Provider>
   );
 }
 const styles = StyleSheet.create({
@@ -359,5 +374,6 @@ const styles = StyleSheet.create({
   logoutText: {
     color: 'white',
     fontSize: 16,
+
   },
 });
