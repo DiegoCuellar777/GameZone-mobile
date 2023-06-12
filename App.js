@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { ImageBackground, StyleSheet, View, TextInput, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
 import { Tab, Text, TabView, Input, Icon } from '@rneui/themed';
+import logo from './assets/luis.png'
 import axios from 'axios';
+import api from './api'
 import Modal from 'react-native-modal';
 import GameList from './src/components/GameList';
-import { TabBarIOS } from 'react-native';
+
+import inputs_filter_actions from './src/store/actions/inputs_filters'
+import {useSelector,useDispatch,} from 'react-redux'
+import { Provider } from 'react-redux';
+import store1 from './src/store/store'
+
+
+
+
+
+const { inputs_filter } = inputs_filter_actions
 
 export default function App() {
+
+
+/*  let store=useSelector(store=>console.log(store))  */
   const [index, setIndex] = React.useState(0);
   const [isLoginView, setIsLoginView] = React.useState(true);
-  const image = { uri: 'https://wallpaperaccess.com/full/982096.jpg' };
+  const image = { uri: 'https://wallpaperaccess.com/full/3591996.jpg' };
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -25,10 +40,6 @@ export default function App() {
   let token
   const [games, setGames] = React.useState([]);
 
-  
-  useEffect(() => {
-    console.log(games);
-  }, [games]);
 
 
   const PurpleButton = ({ onPress, title }) => {
@@ -124,7 +135,9 @@ export default function App() {
     setIsAlertVisible(false);
   };
 
+
   return (
+    <Provider store={store1}>
     <>
     {!isLoggedIn ? (
       <>
@@ -135,11 +148,13 @@ export default function App() {
               resizeMode="cover"
               style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
             >
+
               <View
+
                 h1
                 style={{
                   flex: 0.9,
-                  justifyContent: 'center',
+                  justifyContent: 'between',
                   alignItems: 'center',
                   color: 'blue',
                   backgroundColor: '#00000095',
@@ -148,6 +163,8 @@ export default function App() {
                   padding: 10,
                 }}
               >
+                <Image source={logo} style={{width:200,height:200}}  />
+
                 <Text
                   style={{
                     color: 'white',
@@ -200,7 +217,7 @@ export default function App() {
                   onPress={isLoginView ? handleLogin : handleRegister}
                   title={isLoginView ? 'Sign In' : 'Register'}
                 />
-                <TouchableOpacity onPress={toggleView}>
+                <TouchableOpacity style={{marginTop:15}} onPress={toggleView}>
                   <Text style={{ color: 'white', marginTop: 10, textAlign: 'center' }}>
                     {isLoginView && (
                       <>
@@ -330,6 +347,7 @@ export default function App() {
         </>
     )}
   </>
+</Provider>
   );
 }
 const styles = StyleSheet.create({
@@ -352,5 +370,6 @@ const styles = StyleSheet.create({
   logoutText: {
     color: 'white',
     fontSize: 16,
+
   },
 });
