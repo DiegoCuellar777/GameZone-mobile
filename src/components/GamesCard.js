@@ -18,7 +18,7 @@ export default function GamesCard(props) {
               <Text style={{color:"blue"}}>{games.company_id.name.toUpperCase()}</Text>
               <View>
                 <Text style={{fontWeight:"bold", }}>Price</Text>
-                <Text style={{color:"white", fontWeight:"bold", fontSize:"25"}}>${games.price}</Text>
+                <Text style={{color:"white", fontWeight:"bold", fontSize:25}}>${games.price}</Text>
               </View>
             </View>
             <Image

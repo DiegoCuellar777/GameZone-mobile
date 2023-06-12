@@ -8,16 +8,6 @@ import api from './api'
 import Modal from 'react-native-modal';
 import GameList from './src/components/GameList';
 
-import inputs_filter_actions from './src/store/actions/inputs_filters'
-import {useSelector,useDispatch,} from 'react-redux'
-import { Provider } from 'react-redux';
-import store1 from './src/store/store'
-
-
-
-
-
-const { inputs_filter } = inputs_filter_actions
 
 export default function App() {
 
@@ -137,7 +127,7 @@ export default function App() {
 
 
   return (
-    <Provider store={store1}>
+    // <Provider store={store1}>
     <>
     {!isLoggedIn ? (
       <>
@@ -347,7 +337,7 @@ export default function App() {
         </>
     )}
   </>
-</Provider>
+// </Provider>
   );
 }
 const styles = StyleSheet.create({
