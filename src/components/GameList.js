@@ -1,10 +1,13 @@
+
 import { Text, FlatList, StyleSheet, View, Image, Scrol, ScrollView,Button } from 'react-native'
+
 import React from 'react'
 import { Input } from 'react-native-elements'
 import { useEffect, useState, useRef } from "react";
 import { FontAwesome } from '@expo/vector-icons'
 import GamesCard from './GamesCard'
 import icono from '../../assets/icono.png'
+
 import luis from '../../assets/luis.png'
 import { WebView } from 'react-native-webview'
 import game_action from '../store/actions/game'
@@ -15,7 +18,7 @@ import api from '../../api';
 
 
 let {game_read}=game_action
-const GameList = () => {
+const GameList = ({games}) => {
   let dispatch=useDispatch()
  let store=useSelector(store=> console.log(store)) 
  
@@ -59,7 +62,16 @@ let[games,setGames]=useState([])
 
 
 
+
+  const titleRef = useRef("");
+
+  const [reload, setReload] = useState(false)
+
+  const captureText = () => {
+    setReload(!reload);
+  };
   return (
+
     <ScrollView style={{ display: 'flex' }}>
       <View style={{ width: '100%', height: 250, backgroundColor: 'red', display: 'flex', alignItems: 'center',justifyContent:'space-between'}} >
      
@@ -78,6 +90,7 @@ let[games,setGames]=useState([])
         <Input
           style={{ fontSize: 20, width: 500, padding: 4, marginTop: 10, borderRadius: 20, backgroundColor: "white" }}
           leftIcon={<FontAwesome name="search" size={24} color="black" style={{ marginTop: 10, position: 'absolute', top: 30 }} />}
+
           defaultValue={titleRef.current}
           placeholder="Find your manga here"
           onChangeText={(text) => {
@@ -108,6 +121,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     paddingHorizontal: 5,
 
+
   },
+
 
 }) 
