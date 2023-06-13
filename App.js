@@ -29,11 +29,15 @@ export default function App() {
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
   const [photo, setPhoto] = React.useState('');
+ 
 
   const [isAlertVisible, setIsAlertVisible] = React.useState(false);
+  
+
   const [alertMessage, setAlertMessage] = React.useState('');
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [register,setRegister]=useState(false)
 
   let token
   const [games, setGames] = React.useState([]);
@@ -58,6 +62,8 @@ export default function App() {
       </TouchableOpacity>
     );
   };
+
+  //funcion para iniciar sesion  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -109,11 +115,16 @@ export default function App() {
     }
 
    
-  };
+  }
 
+  //funcion para registrame 
 
-  const handleRegister = (e) => {
+  const handleRegister =async (e) => {
     e.preventDefault();
+    if (!email || !password||!name||!photo) {
+      Alert.alert('Error', 'Please enter both email and password');
+      return;
+    }
 
     let dataUser = {
       name: name,
@@ -122,6 +133,33 @@ export default function App() {
       password: password,
     };
 
+    try {
+      const res = await axios.post(
+        'https://game-zone-back.onrender.com/auth/register',
+        dataUser
+      )
+      console.log(res.data)
+      if (res.data.user) {
+        token = res.data.token 
+        console.log(token)
+
+    
+      axios.get('https://game-zone-back.onrender.com/games/all', headers)
+        .then((res) => {
+          console.log(res.data.Game)
+          setGames(res.data.Game)
+          console.log(games);
+        })
+        .catch((err) => console.log(err))
+
+       register(true);
+        Alert.alert('signed in ',`${res.data.user.email}`);
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+      
+    }
+    setIsLoginView(true)
     console.log(dataUser);
   };
 
