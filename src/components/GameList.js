@@ -1,6 +1,6 @@
 
-import { Text, FlatList, StyleSheet, View, Image, Scrol, ScrollView,Button } from 'react-native'
 
+import { Text, FlatList, StyleSheet, View, Image, ScrollView,Button } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
 import { useEffect, useState, useRef } from "react";
