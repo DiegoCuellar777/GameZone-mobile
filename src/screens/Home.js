@@ -4,10 +4,16 @@ import { Text, Input, Icon } from '@rneui/themed';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import GameList from '../components/GameList';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAuth from '../hooks/useAuth';
 
 
 export default function Home() {
 
+  const {login, logout, auth} = useAuth()
+
+  console.log(auth);
+  
   const [isLoginView, setIsLoginView] = React.useState(true);
   const image = { uri: 'https://wallpaperaccess.com/full/982096.jpg' };
 
@@ -63,17 +69,17 @@ export default function Home() {
         dataUser
       );
       console.log(res.data);
+      login(res.data.user)
 
       if (res.data.user) {
         token = res.data.token 
-        console.log(token)
+        await AsyncStorage.setItem('token', token);
+        
 
         let headers = { headers: { Authorization: `Bearer ${token}` } };
       axios.get('https://game-zone-back.onrender.com/games/all', headers)
         .then((res) => {
-          console.log(res.data.Game)
           setGames(res.data.Game)
-          console.log(games);
         })
         .catch((err) => console.log(err))
 
@@ -99,6 +105,7 @@ export default function Home() {
 
 
   const handleRegister =async (e) => {
+
     e.preventDefault();
     if (!email || !password||!name||!photo) {
       Alert.alert('Error', 'Please enter both email and password');
@@ -291,7 +298,12 @@ export default function Home() {
         <>
               <SafeAreaView style={styles.container}>
                 <GameList games={games}/>
-                <TouchableOpacity onPress={() => setIsLoggedIn(false)} style={styles.logoutButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsLoggedIn(false)
+                    logout()
+                  }}
+                  style={styles.logoutButton}>
                   <Text style={styles.logoutText}>Logout</Text>
                 </TouchableOpacity>
               </SafeAreaView>

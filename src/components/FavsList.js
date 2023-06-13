@@ -4,24 +4,22 @@ import GamesCard from './GamesCard'
 
 
 
-const GameList = ({games}) => {
+const FavList = ({games}) => {
 
   return (
     <ScrollView>
-      <Text style={{color:"white"}}>GameList</Text>
       <FlatList 
         data= {games}
         numColumns={1}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(game)=>String(game._id)}
+        keyExtractor={(game)=>String(game?._id)}
         renderItem={({item})=><GamesCard games={item} />}
         contentContainerStyle={styles.flatListContainer}>
-        
       </FlatList>
     </ScrollView>
   )
 }
-export default GameList
+export default FavList
 
 const styles = StyleSheet.create({
     flatListContainer:{
