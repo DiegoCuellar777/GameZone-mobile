@@ -1,13 +1,13 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import {Text, FlatList, StyleSheet , Scrol, ScrollView} from 'react-native'
 import React from 'react'
 import GamesCard from './GamesCard'
 
 
+
 const GameList = ({games}) => {
 
-    console.log(games)
   return (
-    <View>
+    <ScrollView>
       <Text style={{color:"white"}}>GameList</Text>
       <FlatList 
         data= {games}
@@ -18,14 +18,14 @@ const GameList = ({games}) => {
         contentContainerStyle={styles.flatListContainer}>
         
       </FlatList>
-    </View>
+    </ScrollView>
   )
 }
 export default GameList
 
 const styles = StyleSheet.create({
     flatListContainer:{
-        backgroundColor:"#00000095",
+        backgroundColor:"#000000",
         paddingHorizontal:5,
     }
 }) 
