@@ -1,4 +1,6 @@
-import { Text, FlatList, StyleSheet, View, Image, Scrol, ScrollView,Button } from 'react-native'
+
+
+import { Text, FlatList, StyleSheet, View, Image, ScrollView,Button } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
 import { useEffect, useState, useRef } from "react";
@@ -15,7 +17,7 @@ import api from '../../api';
 
 
 let {game_read}=game_action
-const GameList = () => {
+const GameList = ({games}) => {
   let dispatch=useDispatch()
  let store=useSelector(store=> console.log(store)) 
  
@@ -56,6 +58,8 @@ let[games,setGames]=useState([])
            
         })
 }, [ reload])
+
+
 
 
 
@@ -108,6 +112,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     paddingHorizontal: 5,
 
+
   },
+
 
 }) 

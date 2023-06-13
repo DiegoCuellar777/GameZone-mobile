@@ -5,7 +5,9 @@ import Favorite from './Favorite'
 
 
 export default function GamesCard(props) {
-  const { games,setGames } = props
+
+  const { games } = props
+
   const navigation = useNavigation()
 
   const gameDetails = () => {
