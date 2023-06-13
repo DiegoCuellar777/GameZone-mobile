@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
 import { Text, Input, Icon } from '@rneui/themed';
+import SweetAlert from 'react-native-sweet-alert'
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import GameList from '../components/GameList';
@@ -15,7 +16,7 @@ export default function Home() {
   console.log(auth);
   
   const [isLoginView, setIsLoginView] = React.useState(true);
-  const image = { uri: 'https://wallpaperaccess.com/full/982096.jpg' };
+  const image = { uri: 'https://www.xtrafondos.com/descargar.php?id=5703&resolucion=3840x2158' };
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -83,8 +84,27 @@ export default function Home() {
         })
         .catch((err) => console.log(err))
 
-        setIsLoggedIn(true);
-        Alert.alert('Welcome', `Hello ${res.data.user.email}`);
+        console.log(res.data.user.email);
+        
+        if (!isLoggedIn) {
+        setIsLoggedIn(true)
+        SweetAlert.showAlertWithOptions({
+          title: 'welcome',
+          subTitle: '',
+          confirmButtonTitle: 'OK',
+          confirmButtonColor: '#000',
+          otherButtonTitle: 'Cancel',
+          otherButtonColor: '#dedede',
+          style: 'success',
+          cancellable: true
+        })
+          console.log('holaaaa');
+          console.log(res.data.message);
+          
+        }
+    
+        
+        
       } else {
         Alert.alert('Error', 'Invalid email or password');
       }
@@ -178,7 +198,8 @@ export default function Home() {
       <ImageBackground
               source={image}
               resizeMode="cover"
-              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+              style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}
+              
             >
               <View
                 h1
@@ -316,6 +337,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+    borderRadius:50
   },
   text: {
     color: 'white',
