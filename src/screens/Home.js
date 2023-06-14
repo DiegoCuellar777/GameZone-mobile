@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
 import { Text, Input, Icon } from '@rneui/themed';
-import SweetAlert from 'react-native-sweet-alert'
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import GameList from '../components/GameList';
@@ -88,23 +87,10 @@ export default function Home() {
         
         if (!isLoggedIn) {
         setIsLoggedIn(true)
-        SweetAlert.showAlertWithOptions({
-          title: 'welcome',
-          subTitle: '',
-          confirmButtonTitle: 'OK',
-          confirmButtonColor: '#000',
-          otherButtonTitle: 'Cancel',
-          otherButtonColor: '#dedede',
-          style: 'success',
-          cancellable: true
-        })
-          console.log('holaaaa');
           console.log(res.data.message);
           
         }
     
-        
-        
       } else {
         Alert.alert('Error', 'Invalid email or password');
       }

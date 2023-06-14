@@ -13,17 +13,12 @@ import game_action from '../store/actions/game'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native'
 import inputs_filter_actions from '../store/actions/inputs_filters'
-
 import axios from 'axios'
 import api from '../../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Navigation from '../navigation/Navigation';
 
 
-
-const { inputs_filter } = inputs_filter_actions
-
-let { game_read } = game_action
 const GameList = () => {
 
   const getToken = async () => {
@@ -77,6 +72,12 @@ useEffect(() => {
 }, [])
 console.log(categories);
 
+    const [reload, setReload] = useState(false)
+    const categoryRef = useRef([]);
+    const titleRef = useRef("");
+    const captureText = () => {
+      setReload(!reload);
+    };
 
 const captureText = () => {
     setReload(!reload);
@@ -184,7 +185,7 @@ useEffect(() => {
         data={games}
         numColumns={1}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(game) => String(game._id)}
+        keyExtractor={(game) => String(game.title)}
         renderItem={({ item }) => <GamesCard games={item} />}
         contentContainerStyle={styles.flatListContainer}>
 
