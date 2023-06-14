@@ -16,7 +16,9 @@ import api from "../../api";
 
 const Profile = () => {
   const navigation = useNavigation()
-  const {login,logout, auth} = useAuth()
+
+  const {login, auth} = useAuth()
+
 console.log(auth);
  
 

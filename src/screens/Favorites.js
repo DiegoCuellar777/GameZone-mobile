@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text} from 'react-native'
+import React, { useEffect, useState, useCallback } from 'react'
+import { SafeAreaView, Text, ScrollView} from 'react-native'
 import { getGamesFavoriteApi} from '../api/favorite'
 import useAuth from '../hooks/useAuth'
+import { Button } from 'react-native'
 import axios from 'axios'
 import FavList from '../components/FavsList'
+import { useFocusEffect } from '@react-navigation/native'
+
+
 
 export default function Favorites() {
   const [favs, setGames] = useState([]);
   const { auth } = useAuth();
 
-  useEffect(() => {
+useFocusEffect(
+  useCallback(() => {
     if (auth) {
       (async () => {
         const ids = await getGamesFavoriteApi();
@@ -22,19 +27,26 @@ export default function Favorites() {
         setGames(favs);
       })();
     }
-  }, [auth]);
+  }, [auth])
+)
+
+  
 
   useEffect(() => {
     console.log(favs);
   }, [favs]);
 
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1 , backgroundColor:"black"}}>
       {auth ? (
-        <FavList favs={favs}></FavList>
+
+        <ScrollView>
+          <FavList favs={favs} />
+        </ScrollView>
+
       ) : (
         <Text>No estás logueado</Text>
       )}
-    </View>
+    </SafeAreaView>
   );
 }

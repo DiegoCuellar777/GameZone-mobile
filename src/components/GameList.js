@@ -1,5 +1,4 @@
 
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
@@ -62,6 +61,7 @@ const GameList = () => {
 
   useEffect(() => {
     axios(api + "games")
+
       .then((res) => setGames(res.data.response))
       .catch((err) => console.log(err));
   }, [])
@@ -75,8 +75,44 @@ const GameList = () => {
   console.log(categories);
 
   const captureText = () => {
+
     setReload(!reload);
-  };
+};
+
+useEffect(() => {
+  const fetchGames = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const headersData = token ? { Authorization: `Bearer ${token}` } : {};
+
+      let categories = Object.values(categoryRef.current);
+      let values = [];
+      categories.forEach((each) => {
+        if (each.checked) {
+          values.push(each.value);
+        }
+      });
+
+      const params = {
+        title: titleRef.current,
+        category_id: values.join(","),
+        page: page,
+        limit: 6,
+        order: 1
+      };
+
+      const response = await axios.get(api + "games", {
+        headers: headersData,
+        params: params
+      });
+
+      setGames(response.data.response);
+      setHasNextPage(response.data.response.length > 0);
+      setHasPrevPage(page > 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };})
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -112,6 +148,10 @@ const GameList = () => {
         console.error(error);
       }
     };
+
+
+  const navigation = useNavigation()
+
 
     fetchGames();
   }, [page, reload])
