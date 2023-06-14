@@ -331,12 +331,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logoutButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
+    position:'absolute',
+    bottom:669,
+    left:260
   },
   logoutText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 10,
+    height:12,
   },
 });

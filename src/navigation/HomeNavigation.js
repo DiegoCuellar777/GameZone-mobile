@@ -20,7 +20,7 @@ export default function HomeNavigation() {
     }}>
       <Stack.Screen name="Games" component={HomeScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Details" component={Details}/>
-      <Stack.Screen name="Profile" component={Profile}/>
+      <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
 
     </Stack.Navigator>
   )
