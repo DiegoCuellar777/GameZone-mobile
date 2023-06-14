@@ -4,7 +4,7 @@ const { inputs_filter } = inputs_actions
 
 let initial_state = {
     title: '',
-    categories: [],
+   
 }
 
 const reducer = createReducer(
@@ -16,7 +16,7 @@ const reducer = createReducer(
                 const new_state = {
                     ...state,
                     title: action.payload.title,
-                    categories: action.payload.categories
+                    
                 }
                 return new_state
             }
