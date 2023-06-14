@@ -1,5 +1,3 @@
-
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
