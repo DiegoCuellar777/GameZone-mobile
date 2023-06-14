@@ -16,11 +16,14 @@ import api from "../../api";
 
 const Profile = () => {
   const navigation = useNavigation()
-  const {login,logout, auth} = useAuth()
+
+  const {login, auth} = useAuth()
+
 console.log(auth);
  
 
   return (
+
     <ImageBackground style={styles.container}>
       <View style={{width:'80%',alignItems:'center',height:400,justifyContent:'space-around'}}>
         <Image style={{width:150,height:150,borderRadius:80}} source={{uri:auth.photo }}></Image>
@@ -38,6 +41,7 @@ console.log(auth);
           shadowRadius: 2,
          }}>Thank you for choosing us</Text>
        
+
         </View>
       
     </ImageBackground>
@@ -46,11 +50,24 @@ console.log(auth);
 const styles=StyleSheet.create({
     container:{
         flex:1,
+
         backgroundColor:'white',
+
         width:'100%',
     justifyContent:'center',
         alignItems:'center',
        
+
+
+    },
+    buttonText: {
+      color: '#66B2CE',
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginLeft: 10,
+      alignContent: 'center',
+      alignItems: 'center',
+      textAlign:'center',borderRadius:100
 
     }
 })

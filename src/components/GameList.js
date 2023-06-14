@@ -1,5 +1,4 @@
 
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
@@ -17,11 +16,13 @@ import axios from 'axios'
 import api from '../../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Navigation from '../navigation/Navigation';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
 const GameList = () => {
+
 
   const getToken = async () => {
     try {
@@ -62,6 +63,7 @@ const GameList = () => {
 
   useEffect(() => {
     axios(api + "games")
+
       .then((res) => setGames(res.data.response))
       .catch((err) => console.log(err));
   }, [])
@@ -75,8 +77,45 @@ const GameList = () => {
   console.log(categories);
 
   const captureText = () => {
+
     setReload(!reload);
+};
+
+useEffect(() => {
+  const fetchGames = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const headersData = token ? { Authorization: `Bearer ${token}` } : {};
+
+      let categories = Object.values(categoryRef.current);
+      let values = [];
+      categories.forEach((each) => {
+        if (each.checked) {
+          values.push(each.value);
+        }
+      });
+
+      const params = {
+        title: titleRef.current,
+        category_id: values.join(","),
+        page: page,
+        limit: 6,
+        order: 1
+      };
+
+      const response = await axios.get(api + "games", {
+        headers: headersData,
+        params: params
+      });
+
+      setGames(response.data.response);
+      setHasNextPage(response.data.response.length > 0);
+      setHasPrevPage(page > 1);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -92,6 +131,7 @@ const GameList = () => {
           }
         });
 
+
         const params = {
           title: titleRef.current,
           category_id: values.join(","),
@@ -99,6 +139,7 @@ const GameList = () => {
           limit: 6,
           order: 1
         };
+
 
         const response = await axios.get(api + "games", {
           headers: headersData,
@@ -113,10 +154,17 @@ const GameList = () => {
       }
     };
 
+
+  const navigation = useNavigation()
+
+
     fetchGames();
   }, [page, reload])
 
 
+  let profileButton = () => {
+    navigation.navigate("Profile")
+  }
 
   const navigation = useNavigation()
 
@@ -129,21 +177,23 @@ const GameList = () => {
 
 
 
+
   const next = () => {
     if (games.length > 0) {
-      setPage(page + 1);
+        setPage(page + 1);
     }
-  }
+}
 
   const prev = () => {
     if (games) setPage(page - 1);
-  }
+}
 
   return (
-    <ScrollView style={{ display: 'flex',backgroundColor:'black' }}>
-      <View style={{ width: '100%', height: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#343434' }} >
+    <ScrollView style={{ display: 'flex' }}>
+      <View style={{ width: '100%', height: 250, backgroundColor: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
 
-        <View style={{ width: '95%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={{ width: '95%', backgroundColor: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+
           <Image source={luis} style={{ width: 60, height: 60 }}></Image>
           <TouchableOpacity onPress={profileButton}>
             <Image
@@ -152,6 +202,7 @@ const GameList = () => {
 
             </Image>
           </TouchableOpacity>
+
         </View>
 
         <Text style={{ color: '#FFFFFF', fontSize: 24, fontWeight: 'bold', textTransform: 'uppercase', }}>GAMES</Text>
@@ -162,13 +213,15 @@ const GameList = () => {
             leftIcon={<FontAwesome name="search" size={24} color="white" style={{ marginTop: 10, position: 'absolute', top:8, width: 70, height: 50 }} />}
             defaultValue={titleRef.current}
 
-            placeholder="Find your manga here"
+            placeholder="Find your game here"
             onChangeText={(text) => {
               titleRef.current = text;
               captureText();
             }}
           />
         </View>
+
+
 
 
       </View>
@@ -182,6 +235,7 @@ const GameList = () => {
         contentContainerStyle={styles.flatListContainer}>
 
       </FlatList>
+
       <View style={{ width: '100%',marginTop:20, height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         {hasPrevPage &&
           <TouchableOpacity onPress={prev} style={{
@@ -195,6 +249,7 @@ const GameList = () => {
         }}>
           <Icon name="chevron-right" size={20} color="white" />
         </TouchableOpacity>}
+
 
       </View>
     </ScrollView>
