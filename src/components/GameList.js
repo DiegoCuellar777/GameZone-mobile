@@ -81,7 +81,7 @@ const GameList = ({games}) => {
         data={games}
         numColumns={1}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(game) => String(game._id)}
+        keyExtractor={(game) => String(game.title)}
         renderItem={({ item }) => <GamesCard games={item} />}
         contentContainerStyle={styles.flatListContainer}>
 

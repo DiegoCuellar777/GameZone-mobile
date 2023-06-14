@@ -12,29 +12,29 @@ export async function getGamesFavoriteApi(){
     }
 }
 
-export async function addGameFavorite(id) {
+export async function addGameFavorite(title) {
     try {
         const favorites = await getGamesFavoriteApi()
-        favorites.push(id)
+        favorites.push(title)
         await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(favorites))
     } catch (error) {
         console.log(error)
     }
 }
 
-export async function isGameFavoriteApi(id) {
+export async function isGameFavoriteApi(title) {
     try {
         const response = await getGamesFavoriteApi()
-        return includes(response, id)
+        return includes(response, title)
     } catch (error) {
         console.log(error);
     }
 }
 
-export async function removeGameFavoriteApi(id){
+export async function removeGameFavoriteApi(title){
     try {
         const favorites = await getGamesFavoriteApi()
-        const newFavorites = pull(favorites, id)
+        const newFavorites = pull(favorites, title)
         await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(newFavorites))
     } catch (error) {
         console.log(error);

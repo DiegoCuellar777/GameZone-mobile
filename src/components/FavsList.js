@@ -1,22 +1,22 @@
-import {Text, FlatList, StyleSheet, ScrollView} from 'react-native'
+import {Text, FlatList, StyleSheet, View} from 'react-native'
 import React from 'react'
-import GamesCard from './GamesCard'
+import FavCard from './FavCard'
 
 
 
-const FavList = ({games}) => {
+const FavList = ({favs}) => {
 
   return (
-    <ScrollView>
+    <View>
       <FlatList 
-        data= {games}
+        data= {favs}
         numColumns={1}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(game)=>String(game?._id)}
-        renderItem={({item})=><GamesCard games={item} />}
+        keyExtractor={(fav)=>String(fav?.title)}
+        renderItem={({item})=><FavCard favs={item} />}
         contentContainerStyle={styles.flatListContainer}>
       </FlatList>
-    </ScrollView>
+    </View>
   )
 }
 export default FavList

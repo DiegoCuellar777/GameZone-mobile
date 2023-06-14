@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, Text} from 'react-native'
+import { View, Text} from 'react-native'
 import { getGamesFavoriteApi} from '../api/favorite'
 import useAuth from '../hooks/useAuth'
-import { Button } from 'react-native'
 import axios from 'axios'
 import FavList from '../components/FavsList'
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
 
 export default function Favorites() {
-  const [favGames, setFavGames] = useState([]);
+  const [favs, setGames] = useState([]);
   const { auth } = useAuth();
 
-useEffect(() => {
-  if (auth) {
-    (async () => {
-      const response = await getGamesFavoriteApi()
-      console.log(response);
-    })()
-  }
-}, [auth])
+  useEffect(() => {
+    if (auth) {
+      (async () => {
+        const ids = await getGamesFavoriteApi();
 
+        let favs = [];
+        for await (const id of ids) {
+          const response = await axios.get(`https://game-zone-back.onrender.com/games/${id}`);
+          favs.push(response.data.response);
+        }
+        setGames(favs);
+      })();
+    }
+  }, [auth]);
+
+  useEffect(() => {
+    console.log(favs);
+  }, [favs]);
 
   return (
-    <SafeAreaView>
+    <View>
       {auth ? (
-        <Button title="hola" />
+        <FavList favs={favs}></FavList>
       ) : (
         <Text>No estás logueado</Text>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
