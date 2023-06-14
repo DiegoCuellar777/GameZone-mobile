@@ -6,6 +6,7 @@ import Modal from 'react-native-modal';
 import GameList from '../components/GameList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAuth from '../hooks/useAuth';
+import { getGamesApi } from '../api/games';
 
 
 export default function Home() {
@@ -77,16 +78,13 @@ export default function Home() {
         
 
         let headers = { headers: { Authorization: `Bearer ${token}` } };
-      axios.get('https://game-zone-back.onrender.com/games/all', headers)
-        .then((res) => {
-          setGames(res.data.Game)
-        })
-        .catch((err) => console.log(err))
+        getGamesApi(headers, setGames)
 
         console.log(res.data.user.email);
         
         if (!isLoggedIn) {
         setIsLoggedIn(true)
+        
           console.log(res.data.message);
           
         }
@@ -106,7 +104,7 @@ export default function Home() {
       setIsAlertVisible(true);
     }
 
-   
+
   };
 
 

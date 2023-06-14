@@ -72,13 +72,6 @@ useEffect(() => {
 }, [])
 console.log(categories);
 
-    const [reload, setReload] = useState(false)
-    const categoryRef = useRef([]);
-    const titleRef = useRef("");
-    const captureText = () => {
-      setReload(!reload);
-    };
-
 const captureText = () => {
     setReload(!reload);
 };

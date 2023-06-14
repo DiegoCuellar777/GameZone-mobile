@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import Favorite from './Favorite'
+
 
 
 export default function FavCard(props) {
@@ -25,7 +25,6 @@ export default function FavCard(props) {
               <View style={{ width: "65%", paddingLeft: 20, justifyContent: "space-between" }}>
                 <View style={{ width: "100%", flexDirection: 'row', justifyContent: "space-between", alignItems: "center" }}>
                   <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>{favs?.title}</Text>
-                  <Favorite title={favs?.title} />
                 </View>
                 <Text style={{ color: "#c6cbcf", fontWeight: "bold", fontSize: 16 }}>{favs?.company_id?.name?.toUpperCase()}</Text>
                 <View>
