@@ -7,7 +7,7 @@ const game_read = createAsyncThunk('game_read', async () => {
   try {
     let token = localStorage.getItem('token')
     let headers = { headers: { 'Authorization': `Bearer ${token}` } }
-    let res = await axios(VITE_API + 'games/me', headers)
+    let res = await axios(VITE_API + 'games', headers)
     return {
       game: res.data.response
     }

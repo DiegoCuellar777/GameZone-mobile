@@ -5,7 +5,7 @@ const inputs_filter = createAction(
         return{
             payload: {
                 title:objeto.title,
-                categories:objeto.categories,
+               
             }
         }
     }
