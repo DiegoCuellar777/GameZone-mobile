@@ -39,9 +39,11 @@ useFocusEffect(
   return (
     <SafeAreaView style={{ flex: 1 , backgroundColor:"black"}}>
       {auth ? (
+
         <ScrollView>
           <FavList favs={favs} />
         </ScrollView>
+
       ) : (
         <Text>No estás logueado</Text>
       )}
