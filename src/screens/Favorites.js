@@ -6,7 +6,7 @@ import axios from 'axios'
 import FavList from '../components/FavsList'
 
 export default function Favorites() {
-  const [games, setGames] = useState([]);
+  const [favs, setGames] = useState([]);
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -25,13 +25,13 @@ export default function Favorites() {
   }, [auth]);
 
   useEffect(() => {
-    console.log(games);
-  }, [games]);
+    console.log(favs);
+  }, [favs]);
 
   return (
     <View>
       {auth ? (
-        <FavList games={games}></FavList>
+        <FavList favs={favs}></FavList>
       ) : (
         <Text>No estás logueado</Text>
       )}
