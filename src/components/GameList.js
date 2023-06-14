@@ -1,5 +1,3 @@
-
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView,Button } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
@@ -10,37 +8,24 @@ import icono from '../../assets/icono.png'
 
 import luis from '../../assets/luis.png'
 import { WebView } from 'react-native-webview'
-import game_action from '../store/actions/game'
-import { useSelector, useDispatch } from "react-redux";
+// import game_action from '../store/actions/game'
+// import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios'
 import api from '../../api';
 
 
+// let {game_read} = game_action
 
-let {game_read}=game_action
 const GameList = ({games}) => {
-  let dispatch=useDispatch()
- let store=useSelector(store=> console.log(store)) 
- 
 
-let[games,setGames]=useState([])
-
-
-
- const [reload, setReload] = useState(false)
-
-  const categoryRef = useRef([]);
-  const titleRef = useRef("");
-  
-  const captureText = () => {
-    setReload(!reload);
-  };
-
-
-
-  
-
-
+    // let dispatch = useDispatch()
+    // let store=useSelector(store=> console.log(store)) 
+    const [reload, setReload] = useState(false)
+    const categoryRef = useRef([]);
+    const titleRef = useRef("");
+    const captureText = () => {
+      setReload(!reload);
+    };
 
   useEffect(() => {
     let categories = Object.values(categoryRef.current);
@@ -51,7 +36,7 @@ let[games,setGames]=useState([])
         }
     })
     axios(
-        apiUrl +
+        api +
         `games?title=${titleRef.current}&category_id=${values.join(",")}`
     )
         .then((res) => {
@@ -60,16 +45,6 @@ let[games,setGames]=useState([])
         })
 }, [ reload])
 
-
-
-
-  const titleRef = useRef("");
-
-  const [reload, setReload] = useState(false)
-
-  const captureText = () => {
-    setReload(!reload);
-  };
   return (
 
     <ScrollView style={{ display: 'flex' }}>
