@@ -16,7 +16,7 @@ export default function FavoriteNavigation() {
                 headerBackImage: () => (
                 <Ionicons name="chevron-back" size={24} color="#0174DF" />
             ),
-          }}>
+            }}>
             <Stack.Screen
                 name="Favoritess"
                 component={FavoritesScreen}

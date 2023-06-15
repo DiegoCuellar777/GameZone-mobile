@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { SafeAreaView, Text, ScrollView} from 'react-native'
 import { getGamesFavoriteApi} from '../api/favorite'
 import useAuth from '../hooks/useAuth'
-import { Button } from 'react-native'
 import axios from 'axios'
 import FavList from '../components/FavsList'
 import { useFocusEffect } from '@react-navigation/native'
+import NoLogged from '../components/NoLogged'
 
 
 
@@ -37,15 +37,19 @@ useFocusEffect(
   }, [favs]);
 
   return (
-    <SafeAreaView style={{ flex: 1 , backgroundColor:"black"}}>
+    <SafeAreaView style={{ flex: 1 , backgroundColor:"black",}}>
       {auth ? (
-
         <ScrollView>
-          <FavList favs={favs} />
+          {favs.length > 0 ? (
+            <FavList favs={favs} />
+          ) : (
+              <Text style={{color:"white", marginTop:200, textAlign:"center", fontSize:18}}>
+                Your favorites list is empty
+              </Text>
+          )}
         </ScrollView>
-
       ) : (
-        <Text>No estás logueado</Text>
+        <NoLogged />
       )}
     </SafeAreaView>
   );

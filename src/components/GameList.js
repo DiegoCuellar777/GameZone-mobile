@@ -1,4 +1,3 @@
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
@@ -7,22 +6,15 @@ import { FontAwesome } from '@expo/vector-icons'
 import GamesCard from './GamesCard'
 import icono from '../../assets/icono.png'
 import luis from '../../assets/luis.png'
-import { WebView } from 'react-native-webview'
-import game_action from '../store/actions/game'
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from '@react-navigation/native'
-import inputs_filter_actions from '../store/actions/inputs_filters'
 import axios from 'axios'
 import api from '../../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Navigation from '../navigation/Navigation';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
 const GameList = () => {
-
 
   const getToken = async () => {
     try {
@@ -81,40 +73,6 @@ const GameList = () => {
     setReload(!reload);
 };
 
-useEffect(() => {
-  const fetchGames = async () => {
-    try {
-      const token = await AsyncStorage.getItem('token');
-      const headersData = token ? { Authorization: `Bearer ${token}` } : {};
-
-      let categories = Object.values(categoryRef.current);
-      let values = [];
-      categories.forEach((each) => {
-        if (each.checked) {
-          values.push(each.value);
-        }
-      });
-
-      const params = {
-        title: titleRef.current,
-        category_id: values.join(","),
-        page: page,
-        limit: 6,
-        order: 1
-      };
-
-      const response = await axios.get(api + "games", {
-        headers: headersData,
-        params: params
-      });
-
-      setGames(response.data.response);
-      setHasNextPage(response.data.response.length > 0);
-      setHasPrevPage(page > 1);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
 
   useEffect(() => {
@@ -131,7 +89,6 @@ useEffect(() => {
           }
         });
 
-
         const params = {
           title: titleRef.current,
           category_id: values.join(","),
@@ -139,7 +96,6 @@ useEffect(() => {
           limit: 6,
           order: 1
         };
-
 
         const response = await axios.get(api + "games", {
           headers: headersData,
@@ -155,16 +111,13 @@ useEffect(() => {
     };
 
 
-  const navigation = useNavigation()
+
 
 
     fetchGames();
   }, [page, reload])
 
 
-  let profileButton = () => {
-    navigation.navigate("Profile")
-  }
 
   const navigation = useNavigation()
 
@@ -177,23 +130,21 @@ useEffect(() => {
 
 
 
-
   const next = () => {
     if (games.length > 0) {
-        setPage(page + 1);
+      setPage(page + 1);
     }
-}
+  }
 
   const prev = () => {
     if (games) setPage(page - 1);
-}
+  }
 
   return (
-    <ScrollView style={{ display: 'flex' }}>
-      <View style={{ width: '100%', height: 250, backgroundColor: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
+    <ScrollView style={{ display: 'flex',backgroundColor:'black' }}>
+      <View style={{ width: '100%', height: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#343434' }} >
 
-        <View style={{ width: '95%', backgroundColor: 'white', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-
+        <View style={{ width: '95%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Image source={luis} style={{ width: 60, height: 60 }}></Image>
           <TouchableOpacity onPress={profileButton}>
             <Image
@@ -202,7 +153,6 @@ useEffect(() => {
 
             </Image>
           </TouchableOpacity>
-
         </View>
 
         <Text style={{ color: '#FFFFFF', fontSize: 24, fontWeight: 'bold', textTransform: 'uppercase', }}>GAMES</Text>
@@ -213,15 +163,13 @@ useEffect(() => {
             leftIcon={<FontAwesome name="search" size={24} color="white" style={{ marginTop: 10, position: 'absolute', top:8, width: 70, height: 50 }} />}
             defaultValue={titleRef.current}
 
-            placeholder="Find your game here"
+            placeholder="Find your manga here"
             onChangeText={(text) => {
               titleRef.current = text;
               captureText();
             }}
           />
         </View>
-
-
 
 
       </View>
@@ -235,7 +183,6 @@ useEffect(() => {
         contentContainerStyle={styles.flatListContainer}>
 
       </FlatList>
-
       <View style={{ width: '100%',marginTop:20, height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         {hasPrevPage &&
           <TouchableOpacity onPress={prev} style={{
@@ -249,7 +196,6 @@ useEffect(() => {
         }}>
           <Icon name="chevron-right" size={20} color="white" />
         </TouchableOpacity>}
-
 
       </View>
     </ScrollView>
