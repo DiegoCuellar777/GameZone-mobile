@@ -192,9 +192,9 @@ export default function Home() {
   const [showProfileSection, setShowProfileSection] = useState(false);
   const [profile1, setProfile1] = useState(false);
 
-let abrirprofile =()=>{
-  setProfile1(prevSet =>!prevSet)
-}
+  let abrirprofile = () => {
+    setProfile1(prevSet => !prevSet)
+  }
 
   let profileButton = () => {
     setShowProfileSection(true);
@@ -204,11 +204,11 @@ let abrirprofile =()=>{
     try {
       // Eliminar el token de autenticación almacenado en AsyncStorage
       await AsyncStorage.removeItem('token');
-  
+
       // Restablecer cualquier estado necesario
       setIsLoggedIn(false);
       // Otros estados o acciones que deban restablecerse al cerrar sesión
-  
+
       // Mostrar una alerta de éxito
       Alert.alert('Logged Out', 'You have been successfully logged out.');
     } catch (error) {
@@ -217,9 +217,9 @@ let abrirprofile =()=>{
       Alert.alert('Error', 'An error occurred while logging out. Please try again.');
     }
   };
-  
+
   // ...
-  
+
   <TouchableOpacity onPress={handleLogout}>
     <Text>Logout</Text>
   </TouchableOpacity>
@@ -257,7 +257,7 @@ let abrirprofile =()=>{
                   marginBottom: 10,
                 }}
               >
-                {isLoginView ? 'WELCOME': 'GAME ZONE'}
+                {isLoginView ? 'WELCOME' : 'GAME ZONE'}
               </Text>
               {!isLoginView && (
                 <Input
@@ -354,13 +354,18 @@ let abrirprofile =()=>{
                   {isLoginView && (
                     <>
                       <Text style={{ color: 'white' }}>Don't have an account? </Text>
-                      <Text style={{ color: 'blue' }}>Register</Text>
+
+                      <Text style={[styles.textHover,{color: 'slategray',fontWeight: 'bold',fontSize: 18,}]}>Register</Text>
                     </>
                   )}
                   {!isLoginView && (
                     <>
                       <Text style={{ color: 'white' }}>Already have an account? </Text>
-                      <Text style={{ color: 'blue' }}>Log In</Text>
+                      <Text style={{
+                        color: 'slategray',
+                        fontWeight: 'bold',
+                        fontSize: 18,
+                      }}>Log In</Text>
                     </>
                   )}
                 </Text>
@@ -406,7 +411,7 @@ let abrirprofile =()=>{
               <Image source={luis} style={{ width: 60, height: 60 }}></Image>
               <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-                <TouchableOpacity onPress={()=>{
+                <TouchableOpacity onPress={() => {
                   profileButton()
                   abrirprofile()
                 }}>
@@ -423,25 +428,25 @@ let abrirprofile =()=>{
                 width: '100%'
               }}>
                 <View style={{ width: '100%', alignItems: 'center', height: 400, justifyContent: 'space-around', height: '100%', display: 'flex' }}>
-                  
-                 {!profile1&& 
-                 <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center',position:'relative',bottom:100,backgroundColor:'#000000CC',height:150 }}>
-                    <Image style={{ width: 100, height: 100, borderRadius: 20 }} source={{ uri: auth.photo }}></Image>
-                    <View style={{width:'70%',display:'flex',justifyContent:'space-around',height:'100%',alignItems:'center'}}>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '70%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setIsLoggedIn(false)
-                        handleLogout()
-                        Alert.alert('Logged Out', 'You have been successfully logged out.')
-                      }}
-                      style={styles.logoutButton}>
-                      <Text style={styles.logoutText}>Logout</Text>
-                    </TouchableOpacity>
-                    </View>
-                  </View>}
+
+                  {!profile1 &&
+                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 100, backgroundColor: '#000000CC', height: 150 }}>
+                      <Image style={{ width: 100, height: 100, borderRadius: 20 }} source={{ uri: auth.photo }}></Image>
+                      <View style={{ width: '70%', display: 'flex', justifyContent: 'space-around', height: '100%', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '70%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setIsLoggedIn(false)
+                            handleLogout()
+                            Alert.alert('Logged Out', 'You have been successfully logged out.')
+                          }}
+                          style={styles.logoutButton}>
+                          <Text style={styles.logoutText}>Logout</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>}
                   {/*   <ImageBackground  style={{width:'100%',height:100}}></ImageBackground> */}
-                  <View style={{ marginTop: 5, alignItems: 'center', width: '100%',backgroundColor:'#000000CC',borderRadius:50,padding:10 }}>
+                  <View style={{ marginTop: 5, alignItems: 'center', width: '100%', backgroundColor: '#000000CC', borderRadius: 50, padding: 10 }}>
                     <Text style={{ fontSize: 20, color: 'white' }}>GO TO THE GAME SESSION </Text>
                     <TouchableOpacity onPress={() => setShowProfileSection(false)} style={{
                       width: '50%',
@@ -455,7 +460,7 @@ let abrirprofile =()=>{
                     </TouchableOpacity>
                   </View>
 
-                
+
                 </View>
 
               </ImageBackground>) : (<GameList games={games} />)}
@@ -487,12 +492,16 @@ const styles = StyleSheet.create({
     marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width:'50%'
+    width: '50%'
 
   },
   logoutText: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  
+  textHover: {
+    color: 'cyan',
   },
 });
