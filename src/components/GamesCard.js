@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-n
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Favorite from './Favorite'
+import AddCart from './AddCart'
 
 
 export default function GamesCard(props) {
@@ -27,11 +28,8 @@ export default function GamesCard(props) {
                   <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>{games?.title}</Text>
                   <Favorite _id={games?._id} />
                 </View>
-                <Text style={{ color: "#c6cbcf", fontWeight: "bold", fontSize: 16 }}>{games?.company_id?.name?.toUpperCase()}</Text>
-                <View>
-                  <Text style={{ fontWeight: "bold", color: "grey" }}>Price</Text>
-                  <Text style={{ color: "white", fontWeight: "bold", fontSize: 25 }}>${games?.price}</Text>
-                </View>
+                <Text style={{ color: "#0174DF", fontWeight: "bold", fontSize: 16 }}>{games?.company_id?.name?.toUpperCase()}</Text>
+                <AddCart gamePrice={games?.price} id={games?._id}/>
               </View>
               <Image
                 source={{ uri: `${games?.cover_photo}` }}

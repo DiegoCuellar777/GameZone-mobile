@@ -1,15 +1,13 @@
-
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity, } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
 import { CheckBox } from 'react-native-elements';
-
 import { useEffect, useState, useRef } from "react";
 import { FontAwesome } from '@expo/vector-icons'
 import GamesCard from './GamesCard'
+import icono from '../../assets/icono.png'
+import luis from '../../assets/luis.png'
 import { useSelector, useDispatch } from 'react-redux'
-
-
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import api from '../../api';
@@ -40,6 +38,8 @@ const GameList = () => {
 
 
 
+
+
   let open = () => {
     setOpenCategories(prevState => !prevState)
   }
@@ -48,6 +48,7 @@ const GameList = () => {
   const categoryRef = useRef([]);
   const buscador = useRef();
   const category_id = useRef();
+
 
   const getToken = async () => {
     try {
@@ -121,7 +122,10 @@ const GameList = () => {
         const token = await AsyncStorage.getItem('token');
         const headersData = token ? { Authorization: `Bearer ${token}` } : {};
 
+
+
         const selectedCategories = categor.filter(category => category.checked).map(category => category._id);
+
 
         const params = {
           title: titleRef.current,
@@ -191,8 +195,6 @@ const GameList = () => {
     );
   };
 
-
-
   const next = () => {
     if (games.length > 0) {
       setPage(page + 1);
@@ -219,12 +221,10 @@ const GameList = () => {
             }}
           />
         </View>
-       
          
          <View style={{ width: '70%' }}>
           {options()}
         </View>
-       
       </View>
       <Text style={{ color: "white" }}>GameList</Text>
       <FlatList
