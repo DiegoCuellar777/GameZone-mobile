@@ -13,8 +13,8 @@ export default function Navigation() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "blue",
-        tabBarStyle : {backgroundColor: "#0174DF"},
+        tabBarActiveTintColor: "#0174DF",
+        tabBarStyle : {backgroundColor: "#343434"},
         tabBarInactiveTintColor: "white"
       }}
     >
