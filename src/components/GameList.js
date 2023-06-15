@@ -1,27 +1,13 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> ee3ded754e4f3b1dba9ab7472a1255da77ed171b
 import { Text, FlatList, StyleSheet, View, Image, ScrollView, Button, TouchableOpacity, } from 'react-native'
 import React from 'react'
 import { Input } from 'react-native-elements'
 import { CheckBox } from 'react-native-elements';
-<<<<<<< HEAD
-
-import { useEffect, useState, useRef } from "react";
-import { FontAwesome } from '@expo/vector-icons'
-import GamesCard from './GamesCard'
-import { useSelector, useDispatch } from 'react-redux'
-
-
-=======
 import { useEffect, useState, useRef } from "react";
 import { FontAwesome } from '@expo/vector-icons'
 import GamesCard from './GamesCard'
 import icono from '../../assets/icono.png'
 import luis from '../../assets/luis.png'
 import { useSelector, useDispatch } from 'react-redux'
->>>>>>> ee3ded754e4f3b1dba9ab7472a1255da77ed171b
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import api from '../../api';
@@ -38,33 +24,6 @@ const { inputs_filter } = inputs_filter_actions
 const GameList = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-<<<<<<< HEAD
-=======
-
-  const { title, categories } = useSelector(store => store.inputs);
-
-  const [games, setGames] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [hasPrevPage, setHasPrevPage] = useState(false);
-  const [page, setPage] = useState(1);
-  const [reload, setReload] = useState(false);
-  const [categor, setCategor] = useState([]);
-  const [openCatgories, setOpenCategories] = useState(false)
-
-
-
-
-
-
-  let open = () => {
-    setOpenCategories(prevState => !prevState)
-  }
-
-  const titleRef = useRef("");
-  const categoryRef = useRef([]);
-  const buscador = useRef();
-  const category_id = useRef();
->>>>>>> ee3ded754e4f3b1dba9ab7472a1255da77ed171b
 
   const { title, categories } = useSelector(store => store.inputs);
 
@@ -160,14 +119,10 @@ const GameList = () => {
         const token = await AsyncStorage.getItem('token');
         const headersData = token ? { Authorization: `Bearer ${token}` } : {};
 
-<<<<<<< HEAD
-        const selectedCategories = categor.filter(category => category.checked).map(category => category._id);
-=======
 
 
         const selectedCategories = categor.filter(category => category.checked).map(category => category._id);
 
->>>>>>> ee3ded754e4f3b1dba9ab7472a1255da77ed171b
 
         const params = {
           title: titleRef.current,
