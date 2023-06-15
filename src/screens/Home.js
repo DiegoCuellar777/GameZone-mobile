@@ -18,6 +18,7 @@ import profilefondo from '../../assets/fondoprofile.jpg'
 
 
 
+
 export default function Home() {
 
   const { login, logout, auth } = useAuth()
@@ -94,6 +95,7 @@ export default function Home() {
 
         if (!isLoggedIn) {
           setIsLoggedIn(true)
+          Alert.alert('Hello', `${res.data.user.email}`)
           console.log(res.data.message);
 
         }
@@ -198,6 +200,29 @@ let abrirprofile =()=>{
     setShowProfileSection(true);
 
   };
+  const handleLogout = async () => {
+    try {
+      // Eliminar el token de autenticación almacenado en AsyncStorage
+      await AsyncStorage.removeItem('token');
+  
+      // Restablecer cualquier estado necesario
+      setIsLoggedIn(false);
+      // Otros estados o acciones que deban restablecerse al cerrar sesión
+  
+      // Mostrar una alerta de éxito
+      Alert.alert('Logged Out', 'You have been successfully logged out.');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      // Mostrar una alerta de error si ocurre algún problema al cerrar sesión
+      Alert.alert('Error', 'An error occurred while logging out. Please try again.');
+    }
+  };
+  
+  // ...
+  
+  <TouchableOpacity onPress={handleLogout}>
+    <Text>Logout</Text>
+  </TouchableOpacity>
 
   return (
     <>
@@ -232,7 +257,7 @@ let abrirprofile =()=>{
                   marginBottom: 10,
                 }}
               >
-                WELCOME
+                {isLoginView ? 'WELCOME': 'GAME ZONE'}
               </Text>
               {!isLoginView && (
                 <Input
@@ -407,7 +432,8 @@ let abrirprofile =()=>{
                     <TouchableOpacity
                       onPress={() => {
                         setIsLoggedIn(false)
-                        logout()
+                        handleLogout()
+                        Alert.alert('Logged Out', 'You have been successfully logged out.')
                       }}
                       style={styles.logoutButton}>
                       <Text style={styles.logoutText}>Logout</Text>
