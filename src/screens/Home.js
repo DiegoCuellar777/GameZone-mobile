@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, TouchableOpacity, Alert, SafeAreaView, Image } from 'react-native';
+import { ImageBackground, StyleSheet, View, TouchableOpacity, Alert, SafeAreaView, Image,ScrollView } from 'react-native';
 import { Text, Input, Icon } from '@rneui/themed';
 import axios from 'axios';
 import Modal from 'react-native-modal';
@@ -427,10 +427,11 @@ export default function Home() {
                 flex: 1,
                 width: '100%'
               }}>
+               
                 <View style={{ width: '100%', alignItems: 'center', height: 400, justifyContent: 'space-around', height: '100%', display: 'flex' }}>
 
                   {!profile1 &&
-                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 100, backgroundColor: '#000000CC', height: 150 }}>
+                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 65, backgroundColor: '#000000CC', height: 150 }}>
                       <Image style={{ width: 100, height: 100, borderRadius: 20 }} source={{ uri: auth.photo }}></Image>
                       <View style={{ width: '70%', display: 'flex', justifyContent: 'space-around', height: '100%', alignItems: 'center' }}>
                         <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '70%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
@@ -444,6 +445,7 @@ export default function Home() {
                           <Text style={styles.logoutText}>Logout</Text>
                         </TouchableOpacity>
                       </View>
+       
                     </View>}
                   {/*   <ImageBackground  style={{width:'100%',height:100}}></ImageBackground> */}
                   <View style={{ marginTop: 5, alignItems: 'center', width: '100%', backgroundColor: '#000000CC', borderRadius: 50, padding: 10 }}>
@@ -462,8 +464,12 @@ export default function Home() {
 
 
                 </View>
-
-              </ImageBackground>) : (<GameList games={games} />)}
+                <View style={{width:'100%',height:100,backgroundColor:'white'}}> 
+<Text>holaaaaaaaaaaa</Text>
+                </View>
+            
+              </ImageBackground>
+              ) : (<GameList games={games} />)}
 
 
           </SafeAreaView>
@@ -503,5 +509,21 @@ const styles = StyleSheet.create({
   
   textHover: {
     color: 'cyan',
+  },
+  socialTextContainer: {
+    marginRight: 12,
+  },
+  socialText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  socialIconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  socialIcon: {
+    marginRight: 6,
+    color: 'white',
+    fontSize: 24,
   },
 });

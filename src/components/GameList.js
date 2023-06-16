@@ -219,7 +219,7 @@ const GameList = () => {
           />
         </View>
          
-         <View style={{ width: '70%' }}>
+         <View style={{ width: '100%',backgroundColor:'white' }}>
           {options()}
         </View>
       </View>
@@ -232,18 +232,7 @@ const GameList = () => {
         renderItem={({ item }) => <GamesCard games={item} />}
         contentContainerStyle={styles.flatListContainer}
       />
-      <View style={{ width: '100%', marginTop: 20, height: 50, display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-        {hasPrevPage &&
-          <TouchableOpacity onPress={prev} style={{ borderWidth: 1, borderColor: '#155E75', padding: 5, borderRadius: 5, margin: 10 }}>
-            <Icon name="chevron-left" size={20} color="white" />
-          </TouchableOpacity>
-        }
-        {hasNextPage &&
-          <TouchableOpacity onPress={next} style={{ borderWidth: 1, borderColor: '#155E75', padding: 5, borderRadius: 5, margin: 10 }}>
-            <Icon name="chevron-right" size={20} color="white" />
-          </TouchableOpacity>
-        }
-      </View>
+   
     </ScrollView>
   );
 };
