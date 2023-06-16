@@ -7,7 +7,16 @@ import { useFocusEffect } from '@react-navigation/native';
 import NoLogged from '../components/NoLogged';
 import { getGamesCartApi } from '../api/cart';
 
+
+
 export default function Cart() {
+
+
+
+
+
+
+
   const [cart, setCart] = useState([]);
   const { auth } = useAuth();
   const [totalPrice, setTotalPrice] = useState(0);
@@ -55,6 +64,32 @@ export default function Cart() {
               Your Cart is empty
             </Text>
           )}
+         {/*  <StripeProvider
+            publishableKey="pk_test_Dt4ZBItXSZT1EzmOd8yCxonL"
+            urlScheme="your-url-scheme" // Reemplaza con tu URL Scheme
+            merchantIdentifier="merchant.com.{{YOUR_APP_NAME}}" // Reemplaza con tu identificador de comerciante para Apple Pay
+          >
+            <View>
+              <CardField
+                postalCodeEnabled={false}
+                placeholder={{
+                  number: '4242 4242 4242 4242',
+                }}
+                cardStyle={{
+                  backgroundColor: '#ECECEC',
+                  textColor: '#000000',
+                }}
+                style={{
+                  width: '100%',
+                  height: 50,
+                  marginVertical: 20,
+                }}
+                onCardChange={(cardDetails) => {
+                  console.log('cardDetails', cardDetails);
+                }}
+              />
+            </View>
+          </StripeProvider> */}
         </ScrollView>
       ) : (
         <NoLogged />
