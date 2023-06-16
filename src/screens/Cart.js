@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { SafeAreaView, Text, ScrollView } from 'react-native';
+import { SafeAreaView, Text, ScrollView, StyleSheet, View } from 'react-native';
 import useAuth from '../hooks/useAuth';
 import axios from 'axios';
 import CardItems from '../components/CartItems';
 import { useFocusEffect } from '@react-navigation/native';
 import NoLogged from '../components/NoLogged';
 import { getGamesCartApi } from '../api/cart';
+import { TouchableOpacity } from 'react-native-web';
 
 
 
@@ -49,20 +50,26 @@ export default function Cart() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'black'}}>
       {auth ? (
         <ScrollView>
           {cart.length > 0 ? (
             <>
               <CardItems cart={cart} updateTotalPrice={updateTotalPrice} />
-              <Text style={{ color: 'white', marginTop: 10, marginLeft: 10, fontSize: 18 }}>
+              <Text style={{ color: 'white', marginTop: 10, marginLeft: 10, fontSize: 18, textAlign:"center" }}>
                 Total Price: ${totalPrice}
               </Text>
+              <View style={{flex:1, flexDirection: "column", alignItems:"center"}}>
+                <TouchableOpacity style={{backgroundColor:"#0174DF", padding:10, borderRadius: 5, margin:10}}>
+                  <Text style={{color:"white", fontWeight:"bold", fontSize:18}}>Go to payment</Text>
+                </TouchableOpacity>
+              </View>
             </>
           ) : (
             <Text style={{ color: 'white', marginTop: 200, textAlign: 'center', fontSize: 18 }}>
               Your Cart is empty
             </Text>
+            
           )}
          {/*  <StripeProvider
             publishableKey="pk_test_Dt4ZBItXSZT1EzmOd8yCxonL"

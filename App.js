@@ -9,12 +9,12 @@ import { Provider } from 'react-redux'
 export default function App() {
 
   return (
-<Provider store={store}>
-    <NavigationContainer>
-      <AuthProvider>
-        <Navigation />
-      </AuthProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
+      </NavigationContainer>
     </Provider>
   );
 }

@@ -5,12 +5,14 @@ export default function CartCard(props) {
   const { cart, updateTotalPrice } = props;
   const [selectedValue, setSelectedValue] = useState('1');
   const [selectedPrice, setSelectedPrice] = useState(cart?.price);
+  const [previousPrice, setPreviousPrice] = useState(cart?.price);
 
   useEffect(() => {
     const newPrice = parseInt(selectedValue) * cart?.price;
     setSelectedPrice(newPrice);
-    updateTotalPrice(cart?.price, newPrice);
-  }, [selectedValue, cart]);
+    updateTotalPrice(previousPrice, newPrice);
+    setPreviousPrice(newPrice);
+  }, [selectedValue]);
 
   const handlePriceChange = (value) => {
     setSelectedValue(value);
@@ -22,6 +24,17 @@ export default function CartCard(props) {
       updateTotalPrice(selectedPrice, cart?.price);
     };
   }, []);
+
+  const generatePickerItems = () => {
+    const stock = cart?.stock;
+    const pickerItems = [];
+
+    for (let i = 1; i <= stock; i++) {
+      pickerItems.push(<Picker.Item label={String(i)} value={String(i)} key={String(i)} />);
+    }
+
+    return pickerItems;
+  };
 
   return (
     <>
@@ -43,9 +56,7 @@ export default function CartCard(props) {
                   <View style={{ height: 100, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 22 }}>${selectedPrice}</Text>
                     <Picker selectedValue={selectedValue} onValueChange={handlePriceChange} style={{ width: 50 }}>
-                      <Picker.Item label="1" value="1" />
-                      <Picker.Item label="2" value="2" />
-                      <Picker.Item label="3" value="3" />
+                      {generatePickerItems()}
                     </Picker>
                   </View>
                 </View>
