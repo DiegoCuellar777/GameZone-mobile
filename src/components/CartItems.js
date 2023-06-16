@@ -4,7 +4,7 @@ import CartCard from './CartCard'
 
 
 
-const CartItems = ({cart, handlePriceChange }) => {
+const CartItems = ({cart, updateTotalPrice}) => {
 
   return (
     <View>
@@ -13,7 +13,7 @@ const CartItems = ({cart, handlePriceChange }) => {
         numColumns={1}
         showsVerticalScrollIndicator={false}
         keyExtractor={(fav)=>String(fav?.title)}
-        renderItem={({item})=><CartCard cart={item} onPriceChange={handlePriceChange}/>}
+        renderItem={({item})=><CartCard cart={item} updateTotalPrice={updateTotalPrice} />}
         contentContainerStyle={styles.flatListContainer}>
       </FlatList>
     </View>

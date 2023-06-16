@@ -1,16 +1,27 @@
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback, Picker } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export default function CartCard(props) {
-  const { cart } = props;
+  const { cart, updateTotalPrice } = props;
   const [selectedValue, setSelectedValue] = useState('1');
   const [selectedPrice, setSelectedPrice] = useState(cart?.price);
 
+  useEffect(() => {
+    const newPrice = parseInt(selectedValue) * cart?.price;
+    setSelectedPrice(newPrice);
+    updateTotalPrice(cart?.price, newPrice);
+  }, [selectedValue, cart]);
+
   const handlePriceChange = (value) => {
     setSelectedValue(value);
-    setSelectedPrice(value * cart?.price);
-    props.onPriceChange(value * cart?.price)
   };
+
+  useEffect(() => {
+    return () => {
+      // Restaurar el precio anterior cuando el componente se desmonte
+      updateTotalPrice(selectedPrice, cart?.price);
+    };
+  }, []);
 
   return (
     <>
