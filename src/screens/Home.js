@@ -438,10 +438,10 @@ export default function Home() {
                 <View style={{ width: '100%', alignItems: 'center', height: 400, justifyContent: 'space-around', height: '100%', display: 'flex' }}>
 
                   {!profile1 &&
-                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 55, backgroundColor: '#000000CC', height: 150 }}>
-                      <Image style={{ width: 100, height: 100, borderRadius: 20 }} source={{ uri: auth.photo }}></Image>
-                      <View style={{ width: '70%', display: 'flex', justifyContent: 'space-around', height: '100%', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '70%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
+                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 35, backgroundColor: '#000000CC', height: 150 }}>
+                      <Image style={{ width: 80, height: 80, borderRadius: 40,marginLeft:5 }} source={{ uri: auth.photo }}></Image>
+                      <View style={{ width: '75%', display: 'flex', justifyContent: 'space-around', height: '100%', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '80%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
                         <TouchableOpacity
                           onPress={() => {
                             setIsLoggedIn(false)
@@ -455,7 +455,7 @@ export default function Home() {
 
                     </View>}
                   {/*   <ImageBackground  style={{width:'100%',height:100}}></ImageBackground> */}
-                  <View style={{ marginTop: 5, alignItems: 'center', width: '100%', backgroundColor: '#000000CC', borderRadius: 50, padding: 10,position:'relative',top:100 }}>
+                  <View style={{ marginTop: 5, alignItems: 'center', width: '100%', backgroundColor: '#000000CC', borderRadius: 50, padding: 10, }}>
                     <Text style={{ fontSize: 20, color: 'white' }}>GO TO THE GAME SESSION </Text>
                     <TouchableOpacity onPress={() => setShowProfileSection(false)} style={{
                       width: '50%',
@@ -471,26 +471,26 @@ export default function Home() {
 
 
                 
-                 <View style={{ width: '100%', height: 70, backgroundColor: '#343434',display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center',position:'relative',top:120}}>
+                 <View style={{ width: '100%', height: 60, backgroundColor: '#343434',display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center',position:'relative',top:95}}>
                     <Text style={{color:'white',fontSize:20}}>contact us</Text>
                     <View style={{width:'55%',display:'flex',flexDirection:'row'}}>
                     <TouchableOpacity style={{ marginRight: 6 }}>
-                     <Image style={{width:30,height:30}} source={facebook}></Image>
+                     <Image style={{width:20,height:20}} source={facebook}></Image>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginRight: 6 }}>
-                    <Image style={{width:30,height:30}} source={twitter}></Image>
+                    <Image style={{width:20,height:20}} source={twitter}></Image>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginRight: 6 }}>
-                    <Image style={{width:30,height:30}} source={google}></Image>
+                    <Image style={{width:20,height:20}} source={google}></Image>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginRight: 6 }}>
-                    <Image style={{width:30,height:30}} source={instagram}></Image>
+                    <Image style={{width:20,height:20}} source={instagram}></Image>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginRight: 6 }}>
-                    <Image style={{width:30,height:30}} source={ini}></Image>
+                    <Image style={{width:20,height:20}} source={ini}></Image>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                    <Image style={{width:30,height:30}}  source={git}></Image>
+                    <Image style={{width:20,height:20}}  source={git}></Image>
                     </TouchableOpacity>
                     </View>
                     
