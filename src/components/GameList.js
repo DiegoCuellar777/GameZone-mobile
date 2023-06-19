@@ -219,7 +219,7 @@ const GameList = () => {
           />
         </View>
          
-         <View style={{ width: '100%',backgroundColor:'white' }}>
+         <View style={{ width: '100%' }}>
           {options()}
         </View>
       </View>
