@@ -435,10 +435,10 @@ export default function Home() {
                 width: '100%'
               }}>
 
-                <View style={{ width: '100%', alignItems: 'center', height: 400, justifyContent: 'space-around', height: '100%', display: 'flex' }}>
+                <View style={{ width: '100%', alignItems: 'center', height: 400, justifyContent: 'space-around', height: '100%', display: 'flex',justifyContent:'space-between' }}>
 
                   {!profile1 &&
-                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', position: 'relative', bottom: 35, backgroundColor: '#000000CC', height: 150 }}>
+                    <View style={{ width: '100%', display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#000000CC', height: 150 }}>
                       <Image style={{ width: 80, height: 80, borderRadius: 40,marginLeft:5 }} source={{ uri: auth.photo }}></Image>
                       <View style={{ width: '75%', display: 'flex', justifyContent: 'space-around', height: '100%', alignItems: 'center' }}>
                         <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'white', borderRadius: 12, padding: 20, width: '80%', height: 5, textAlign: 'center', marginBottom: 5 }}>{auth.email}</Text>
@@ -471,7 +471,7 @@ export default function Home() {
 
 
                 
-                 <View style={{ width: '100%', height: 60, backgroundColor: '#343434',display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center',position:'relative',top:95}}>
+                 <View style={{ width: '100%', height: 60, backgroundColor: '#343434',display:'flex',flexDirection:'row',justifyContent:'space-around',alignItems:'center',}}>
                     <Text style={{color:'white',fontSize:20}}>contact us</Text>
                     <View style={{width:'55%',display:'flex',flexDirection:'row'}}>
                     <TouchableOpacity style={{ marginRight: 6 }}>
@@ -524,11 +524,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#3C4B5B',
     padding: 15,
     borderRadius: 10,
-    height: 50,
+    height: 30,
     marginRight: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '50%'
+    width: '40%'
 
   },
   logoutText: {
